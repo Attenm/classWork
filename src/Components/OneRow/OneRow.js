@@ -1,10 +1,14 @@
 import './oneRow.scss';
 import {BiSolidPencil as Pencil} from 'react-icons/bi';
 import { MdDelete as Delete} from "react-icons/md"
-
-
 import { Button } from 'react-bootstrap';
+import { useContext } from 'react';
+import { MyBook } from '../../Context';
+
 export default function OneRow({id, title, author, year, publishing, pages, count}) {
+
+    const {handlerDelete} = useContext(MyBook);
+
     return (
         <tr>
             <td>{id}</td>
@@ -14,8 +18,9 @@ export default function OneRow({id, title, author, year, publishing, pages, coun
             <td>{publishing}</td>
             <td>{pages}</td>
             <td>
-                <Button variant='primary'><Pencil/></Button>
-                <Button variant='danger'><Delete/></Button>
+                {count}
+                <Button variant='primary' className="me-2 ms-5"><Pencil/></Button>
+                <Button variant='danger' onClick={()=>handlerDelete(id)}><Delete/></Button>
             </td>
         </tr>
     )
